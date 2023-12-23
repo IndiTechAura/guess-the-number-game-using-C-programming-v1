@@ -1,45 +1,76 @@
+/*This is the source code for the Guess The Number Game
+It has been created by Dhritam Kalita. If you can't understand anything
+or everything you can contact me and i'll try to help you out.
+Instagram: inditechaura
+E=mail: inditechaura@gmail.com
+The code has been aided with comments for your understanding
+N.B. - Only the values in lines 18 and 19 (of the code) can be/should be changed.
+if you anything beyond, it will be completely at your own
+risk/responsibility. I won't be responsible for any errors due to
+changes in the code made by you. This is just and only for educational purpose :)
+Jai Hind ---*/
+
+//including the required header files.
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
 
-#define MAX_ATTEMPTS 5
-#define MAX_RANDOM_NUMBER 100
+#define MAX_ATTEMPTS 5 //change this number if you want to change the number of attempts the player gets to guess the number.
+#define MAX_RANDOM_NUMBER 100 //this is the maximum number (1 to this number) the random number should be.
+
+/*If you Change the code beyond this, do it at your
+own risk. if any error occurs due to the changes made
+by you, i am not responsible beyond this.*/
 int main()
 {
-    srand(time(NULL));
-    int tempRv = MAX_RANDOM_NUMBER, tempAv = MAX_ATTEMPTS;
-    int randomNumber = rand() %tempRv + 1;
-    int attempts = tempAv;
-    int guess;
+    srand(time(NULL)); //set the random number using srand() function.
+    int tempRv = MAX_RANDOM_NUMBER, tempAv = MAX_ATTEMPTS; //tempRv and tempAv stores the values of the macros above.
+    int randomNumber = rand() %tempRv + 1; //assign an integer randomNumber to store the random number in it.
+    int attempts = tempAv; //assaign an integer attempts to store the number of chances to guess the number.
+    int guess; //guess integer for the user's input of his/her guessed number
 
+    /*Welcome message is shown below...*/
     printf("Welcome to Guess The Number Game.");
     printf("\nI've guessed a nummber between 1 to %d. You have %d chances to guess the number...", tempRv, tempAv);
+
+    //the for() loop is used without any arguments for continious loop... (change the loop if you want cuz this consumes high memory)
     for(;;)
     {
+        //a message guiding your turn to enter a guess
         printf("\n\nYOUR GUESS:  ");
+        //the scanf() function has been improved for error handling (you can use replace it with the casual scan() if u want)
         if (scanf(" %d", &guess) != 1){
+            //error message for failure in reading input
             printf("\nThere occured an unexpected failure in reading the input...\nPlease try again.");
-            return 101;
+            return 101; //return value for failure in reading input
         }
 
+        //condition if the player guess the correct number
         if (guess == randomNumber){
+            //message for correct guess (winning message)
             printf("\n***CORRECT***\nYou've successfully guessed the right number which was %d.\n\n\n", randomNumber);
-            break;
+            break; //break; is used to exit the loop (program) when correct number is guessed
         }
 
+        //condition if the player's guess is larger
         else if (guess > randomNumber){
-            printf("\nToo High. Try a smaller number. You have %d chance(s) left.", --attempts);
+            //message for trying out a smaller number.
+            printf("\nToo High. Try a smaller number. You have %d chance(s) left.", --attempts); //--attempts is ued for reducing the attempts
         }
 
+        //condition if the player's guess is smaller
         else if (guess < randomNumber){
+            //message for trying a larger number.
             printf("\nToo low. Try a larger number. You have %d chance(s) left.", --attempts);
         }
 
+        //condition if the player is out of attempts assigned to him.
         if (attempts <= 0){
+            //display gameover message
             printf("\n***GAME OVER***\nYou are out of your %d chances to guess the correct number which was %d.", tempAv, randomNumber);
             printf("\nRestart the program to play again :)\n\n\n");
-            break;
+            break; //break; is ued to exit the loop (program)
         }
     }
-    return 0;
+    return 869745; //return value for main() function (u can give any values here. i've given 869745)
 }
